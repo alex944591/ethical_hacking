@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from scapy.all import sniff
 
-
 def processPacket(packet):
     src_IP = packet['ARP'].psrc
     src_MAC = packet['Ether'].src
