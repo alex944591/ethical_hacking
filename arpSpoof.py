@@ -2,7 +2,6 @@ from scapy.layers.l2 import ARP
 from scapy.layers.l2 import getmacbyip
 from scapy.layers.l2 import get_if_hwaddr
 from scapy.all import send
-
 import sys
 
 
