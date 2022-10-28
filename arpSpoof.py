@@ -20,7 +20,9 @@ def arp_restore(target_ip, target_mac, sender_ip, sender_mac):
 if __name__ == "__main__":
     intf, t_ip, r_ip  = sys.argv[1], sys.argv[2], sys.argv[3]
     t_mac = getmacbyip(t_ip)
+    print(f"{t_mac=}")
     r_mac = getmacbyip(r_ip)
+    print(f"{r_mac=}")
 
     try:
         print("Sending spoofed ARP packets")
@@ -29,7 +31,12 @@ if __name__ == "__main__":
             arp_spoof(r_ip, r_mac, t_ip)
     except KeyboardInterrupt:
         print(f"Sending restoring ARP packets to {t_ip}({t_mac})")
+        print(f"{r_mac=}, {r_ip}")
         arp_restore(t_ip, t_mac, r_ip, r_mac)
         print(f"Sending restoring ARP packets to {r_ip}({r_mac})")
         arp_restore(r_ip, r_mac, t_ip, t_mac)
+        print(f"{t_mac=}, {t_ip}")
+
+
+
         quit()
