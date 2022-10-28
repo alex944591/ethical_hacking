@@ -30,13 +30,8 @@ if __name__ == "__main__":
             arp_spoof(t_ip, t_mac, r_ip)
             arp_spoof(r_ip, r_mac, t_ip)
     except KeyboardInterrupt:
-        print(f"Sending restoring ARP packets to {t_ip}({t_mac})")
-        print(f"{r_mac=}, {r_ip}")
-        arp_restore(t_ip, t_mac, r_ip, r_mac)
-        print(f"Sending restoring ARP packets to {r_ip}({r_mac})")
-        arp_restore(r_ip, r_mac, t_ip, t_mac)
-        print(f"{t_mac=}, {t_ip}")
-
-
-
+        print("Sending restoring ARP packets")
+        for i in range(5):
+            arp_restore(t_ip, t_mac, r_ip, r_mac)
+            arp_restore(r_ip, r_mac, t_ip, t_mac)
         quit()
